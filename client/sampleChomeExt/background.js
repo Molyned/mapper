@@ -16,11 +16,10 @@ function onClickHandler(info, tab) {
   var sText = info.selectionText;
   chrome.storage.sync.set({'Location': sText}, function() {
     // Notify that we saved.
-    console.log('Settings saved');
+    console.log('Location saved');
   });
-  // localStorage.setItem('Location', sText);
+  localStorage.setItem('Location', sText);
   var jax = new XMLHttpRequest();
-  jax.onreadystatechange = alertContents; 
   jax.open("POST","http://localhost:3000/", true); 
   jax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   jax.send("Location= " + sText);
@@ -30,6 +29,7 @@ function onClickHandler(info, tab) {
     }
   }
   console.log(Location);
+  
   // var cat = localStorage.getItem('Location')
   // console.log(cat);
 

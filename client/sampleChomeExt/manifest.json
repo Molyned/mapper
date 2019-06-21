@@ -2,21 +2,18 @@
   "name": "Getting Started Example",
   "version": "1.0",
   "description": "Build an Extension!",
-  "permissions": ["contextMenus", "activeTab", "declarativeContent", "storage"],
+  "permissions": ["contextMenus",
+      "activeTab",
+      "declarativeContent",
+      "storage",
+      "http://localhost:3000/"
+  ],
   "options_page": "options.html",
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": ["contentScript.js"]
-    }
-  ],
-  "page_action": {
+    "page_action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "images/get_started16.png",

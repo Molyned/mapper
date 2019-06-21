@@ -1,3 +1,4 @@
+/*global chrome*/
 import React, {Component} from 'react';
 import MapContainer from './components/map';
 import styled, {css} from 'styled-components'
@@ -6,7 +7,6 @@ import ChangeViewMenu from './components/changeViewMenu';
  
 let cat = localStorage.getItem('Location')
 console.log(cat)
-
 // import Dropdown from 'react-bootstrap/Dropdown';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
 
@@ -39,6 +39,8 @@ export class App extends Component {
       })
     )
   }
+
+  
 
   componentWillMount() {
     localStorage.getItem('Location') && this.setState ({
