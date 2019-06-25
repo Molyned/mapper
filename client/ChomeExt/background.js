@@ -23,8 +23,8 @@ function onClickHandler(info, tab) {
   localStorage.setItem('Location', sText);
   var jax = new XMLHttpRequest();
   jax.open("POST","http://localhost:5000/server"); 
-  jax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-  jax.send("Location= " + sText);
+  jax.setRequestHeader("Content-Type","application/json");
+  jax.send(JSON.stringify({"Location": sText}));
   jax.onreadystatechange = function() { 
     if(jax.readyState===4) { 
       alert(jax.responseText);
