@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 
-'use strict';
+//'use strict';
+
+
 
 chrome.runtime.onInstalled.addListener(function() {
   var context = "selection";
@@ -20,7 +22,7 @@ function onClickHandler(info, tab) {
   });
   localStorage.setItem('Location', sText);
   var jax = new XMLHttpRequest();
-  jax.open("POST","http://localhost:3000/", true); 
+  jax.open("POST","http://localhost:5000/server"); 
   jax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
   jax.send("Location= " + sText);
   jax.onreadystatechange = function() { 
@@ -28,6 +30,16 @@ function onClickHandler(info, tab) {
       alert(jax.responseText);
     }
   }
+  // var axios = require('axios')
+
+  // axios({
+  //   method: 'POST',
+  //   url: "/api/upload/background",
+  //   data: {
+  //     Location: sText
+  //   },
+  // })
+
   console.log(Location);
   
   // var cat = localStorage.getItem('Location')

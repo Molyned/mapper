@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "Mapper",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Save Locations to a google Map",
   "permissions": ["contextMenus",
       "activeTab",
       "declarativeContent",

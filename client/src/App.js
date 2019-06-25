@@ -55,7 +55,6 @@ export class App extends Component {
         {/* <View style={{ flexDirection: 'row' }}></View> */}
           <ContinentMenu changeView={this.changeView} />
           <ChangeViewMenu  />
-        <p>Calgary, Alberta</p>
         </header>
         <MapContainer center={this.state.center} />
         
