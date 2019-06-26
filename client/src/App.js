@@ -38,24 +38,18 @@ export class App extends Component {
       })
     )
   }
-
-  componentWillMount() {
-    localStorage.getItem('Location') && this.setState ({
-      Location: JSON.Parse(localStorage.getItem('Location'))
-    })
-  }
   
   getLngLat = () => {
     return axios({
-      url: "/LatLng",
-      method: "GET"
+      method: "GET",
+      url: "/"
     })
   }
 
   componentDidMount() {
     this.getLngLat()
     .then(response => {
-      console.log(response.data)
+      console.log(response.data.LatLng)
     });
   }
 
