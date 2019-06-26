@@ -5,11 +5,11 @@ const bodyParser = require('body-parser')
 const googleMapsClient = require('@google/maps').createClient({
   key: 'AIzaSyCp1Wpapl48sNfmuNfOx-RRJydW4gMGaRI'
 });
-
 let LatLng = [];
+let locations = [];
 
+//set up body parser
 app.use(bodyParser.json());
-
 
 // create a GET route
 
@@ -18,12 +18,14 @@ app.get('/api/upload/background', (req, res) => {
 });
 
 app.post('/server', (req, res) => {
-  console.log(req.body.address);
+  locationName = req.body.address
+  console.log(locationName);
   googleMapsClient.geocode(req.body,
       function(err, response) {
     if (!err) {
       LatLng = [...LatLng, response.json.results[0].geometry.location]
-      console.log(LatLng);
+      locations = [...locations, locationName]
+      console.log(LatLng, locations);
     } 
     console.log(address)
   });

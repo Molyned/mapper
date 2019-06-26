@@ -4,7 +4,8 @@ import MapContainer from './components/map';
 import styled, {css} from 'styled-components'
 import ContinentMenu from './components/continentMenu';
 import ChangeViewMenu from './components/changeViewMenu';
- 
+import Grid from '@material-ui/core/Grid';
+
 // import Dropdown from 'react-bootstrap/Dropdown';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
 
@@ -64,8 +65,14 @@ export class App extends Component {
       <div className="App">
         <header className="App-header">
         {/* <View style={{ flexDirection: 'row' }}></View> */}
-          <ContinentMenu changeView={this.changeView} />
-          <ChangeViewMenu  />
+        <Grid container spacing={3} justify="center">
+          <Grid item xs={3}>
+            <ContinentMenu changeView={this.changeView} />
+          </Grid>
+          <Grid item xs={3}>
+            <ChangeViewMenu  />
+          </Grid>  
+        </Grid>  
         </header>
         <MapContainer center={this.state.center} />
         
