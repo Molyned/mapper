@@ -1,12 +1,10 @@
-/*global chrome*/
 import React, {Component} from 'react';
+import axios from "axios";
 import MapContainer from './components/map';
 import styled, {css} from 'styled-components'
 import ContinentMenu from './components/continentMenu';
 import ChangeViewMenu from './components/changeViewMenu';
  
-let cat = localStorage.getItem('Location')
-console.log(cat)
 // import Dropdown from 'react-bootstrap/Dropdown';
 // import DropdownButton from 'react-bootstrap/DropdownButton';
 
@@ -40,14 +38,27 @@ export class App extends Component {
     )
   }
 
-  
-
   componentWillMount() {
     localStorage.getItem('Location') && this.setState ({
       Location: JSON.Parse(localStorage.getItem('Location'))
     })
   }
   
+  getLngLat = () => {
+    return axios({
+      url: "/LatLng",
+      method: "GET"
+    })
+  }
+
+  componentDidMount() {
+    this.getLngLat()
+    .then(response => {
+      console.log(response.data)
+    });
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -63,5 +74,5 @@ export class App extends Component {
   }
 
 }
-console.log(Location)
+
 export default App;

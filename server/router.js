@@ -7,11 +7,6 @@ module.exports = function(app) {
   // mount api routes on to api router
   const apiRouter = express.Router();
   apiRouter.use('/upload', uploadRoutes);
-  
-
-
-  
-
   // mount api router on to app
   app.use('/api', apiRouter);
 

@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser')
+const googleMapsClient = require('@google/maps').createClient({
+  key: 'AIzaSyCp1Wpapl48sNfmuNfOx-RRJydW4gMGaRI'
+});
 
+let LatLng = [];
 
 app.use(bodyParser.json());
 
@@ -14,8 +18,20 @@ app.get('/api/upload/background', (req, res) => {
 });
 
 app.post('/server', (req, res) => {
-  console.log(req.body);
+  console.log(req.body.address);
+  googleMapsClient.geocode(req.body,
+      function(err, response) {
+    if (!err) {
+      LatLng = [...LatLng, response.json.results[0].geometry.location]
+      console.log(LatLng);
+    } 
+    console.log(address)
+  });
   return res.send();
+});
+
+app.get('/getLngLat', (req, res) => {
+  res.send({ LatLng: LatLng });
 });
 
 // console.log that your server is up and running
