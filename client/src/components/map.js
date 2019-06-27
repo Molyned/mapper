@@ -5,6 +5,9 @@ const mapStyles = {
     width: '100%',
     height: '90%'
   };
+  const places = [];
+  const coords = [];
+
 
   const continents = {
     NA: {lat: 54.5260, lng: -105.2551},
@@ -50,11 +53,14 @@ const mapStyles = {
       var i;
       for (i = 0; i < response.data.locations.length; i++) {
         console.log(response.data.locations[i], response.data.LatLng[i]);
+        places.push(response.data.locations[i]) 
+        coords.push(response.data.LatLng[i])
       }
     });
   }
 
       render() {
+          
           return(
               
               <Map
@@ -73,6 +79,12 @@ const mapStyles = {
                   : {lat: 44.3, lng: -76.48}
                 }
             >
+                <Marker
+                    onClick={this.onMarkerClick}
+                    name={'Daniels Home'}
+                    position={{ lat: 44.230533, lng: -76.460828}}
+
+                />
                 <Marker
                     onClick={this.onMarkerClick}
                     name={'Daniels Home'}
