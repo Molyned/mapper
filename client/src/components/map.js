@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Map, GoogleApiWrapper,  InfoWindow, Marker} from 'google-maps-react';
-
+import axios from "axios";
 const mapStyles = {
     width: '100%',
     height: '90%'
@@ -35,7 +35,25 @@ const mapStyles = {
             activeMarker: marker,
             showingInfoWindow: true
         });
-         
+    
+     
+  getLngLat = () => {
+    return axios({
+      method: "POST",
+      url: "/server"
+    })
+  }
+
+  componentDidMount() {
+    this.getLngLat()
+    .then(response => {
+      var i;
+      for (i = 0; i < response.data.locations.length; i++) {
+        console.log(response.data.locations[i], response.data.LatLng[i]);
+      }
+    });
+  }
+
       render() {
           return(
               
@@ -57,7 +75,7 @@ const mapStyles = {
             >
                 <Marker
                     onClick={this.onMarkerClick}
-                    name={'Kenyatta'}
+                    name={'Daniels Home'}
                     position={{ lat: 44.230533, lng: -76.460828}}
 
                 />
