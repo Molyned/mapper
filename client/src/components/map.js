@@ -50,57 +50,80 @@ const mapStyles = {
   componentDidMount() {
     this.getLngLat()
     .then(response => {
-      var i;
-      for (i = 0; i < response.data.locations.length; i++) {
-        console.log(response.data.locations[i], response.data.LatLng[i]);
+      for (let i = 0; i < response.data.locations.length; i++) {
         places.push(response.data.locations[i]) 
         coords.push(response.data.LatLng[i])
-      }
+        //console.log(places[i], coords[i])
+        }
+        console.log(places, coords)
     });
-  }
+  } 
+//   createMarkers = () => {
+ 
 
+//     const markers =[]
+        
+//         for (let i = 0; i < coords.length; i++){
+//             markers.push(<Marker
+//             onClick={this.onMarkerClick}
+//             name={places[i]}
+//             position={coords[i]}
+//          />) 
+//         console.log(markers)
+//         }
+//     return markers;
+    
+// }
+    createMarkers = () => {
+        return this.continents.map((index) => {
+        return <Marker
+            onClick = { this.onMarkerClick }
+            position = { index.coords }
+            name = { index.places } />
+        })
+    }
+
+ 
       render() {
-          
+         
           return(
-              
-              <Map
-              google={this.props.google}
-            //   zoom={9}
-            zoom = {
-                this.props.center
-                ? 4
-                : 9
-            }
-              style={mapStyles}
-              initialCenter={{lat: 44.3, lng: -76.48}}
-              center={
-                  this.props.center
-                  ? continents[this.props.center]
-                  : {lat: 44.3, lng: -76.48}
-                }
-            >
-                <Marker
-                    onClick={this.onMarkerClick}
-                    name={'Daniels Home'}
-                    position={{ lat: 44.230533, lng: -76.460828}}
+                    
+                <Map
+                    google={this.props.google}
+                    //   zoom={9}
+                    zoom = {
+                        this.props.center
+                        ? 4
+                        : 9
+                    }
+                    style={mapStyles}
+                    initialCenter={{lat: 44.3, lng: -76.48}}
+                    center={
+                        this.props.center
+                        ? continents[this.props.center]
+                        : {lat: 44.3, lng: -76.48}
+                        }
+                    >
+                    <Marker
+                        onClick={this.onMarkerClick}
+                        name={'Daniels Home'}
+                        position={{ lat: 44.230533, lng: -76.460828}}
 
-                />
-                <Marker
-                    onClick={this.onMarkerClick}
-                    name={'Daniels Home'}
-                    position={{ lat: 44.230533, lng: -76.460828}}
-
-                />
-                <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}
-                    onClose={this.onClose}
-                >
+                    />
                     <div>
-                        <h4>{this.state.selectedPlace.name}</h4>
+                        {this.createMarkers()}
                     </div>
-                </InfoWindow>
-            </Map>
+                    
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                        onClose={this.onClose}
+                    >
+                        <div>
+                            <h4>{this.state.selectedPlace.name}</h4>
+                        </div>
+                    </InfoWindow>
+                </Map>
             );
       }
   }
