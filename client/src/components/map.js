@@ -146,6 +146,6 @@ const mapStyles = {
 // } 
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyCp1Wpapl48sNfmuNfOx-RRJydW4gMGaRI'
+    apiKey: 'temporaryily deleted'
 })(MapContainer);
 
