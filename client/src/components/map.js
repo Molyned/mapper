@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Map, GoogleApiWrapper,  InfoWindow, Marker} from 'google-maps-react';
 import axios from "axios";
+require('dotenv').config()
+
 const mapStyles = {
     width: '100%',
     height: '90%'
   };
-  const places = [];
-  const coords = [];
 
+  const API_KEY = process.env.REACT_APP_MAP_KEY;
 
   const continents = {
     NA: {lat: 54.5260, lng: -105.2551},
@@ -22,7 +23,8 @@ const mapStyles = {
       state = {
         showingInfoWindow: false,
         activeMarker: {},
-        selectedPlace: {}
+        selectedPlace: {},
+        markers: []
       };
       onClose = props => {
         if(this.state.showingInfoWindow) {
@@ -39,7 +41,6 @@ const mapStyles = {
             showingInfoWindow: true
         });
     
-     
   getLngLat = () => {
     return axios({
       method: "POST",
@@ -47,43 +48,30 @@ const mapStyles = {
     })
   }
 
-  componentDidMount() {
+  componentDidMount(){
+    this.getMarkers()
+  }
+
+  getMarkers = () => {
     this.getLngLat()
     .then(response => {
-      for (let i = 0; i < response.data.locations.length; i++) {
-        places.push(response.data.locations[i]) 
-        coords.push(response.data.LatLng[i])
-        //console.log(places[i], coords[i])
+        for (let i = 0; i < response.data.locations.length; i++) {
+            console.log("Coords: ", response.data.LatLng[i])
+            console.log("Name: ", response.data.locations[i])
+
+            this.setState({
+                markers:[...this.state.markers, 
+                    <Marker
+                    key ={i}
+                    onClick = { this.onMarkerClick }
+                    position = { response.data.LatLng[i] }
+                    name = { response.data.locations[i] } />
+                ]
+            })
         }
-        console.log(places, coords)
     });
   } 
-//   createMarkers = () => {
- 
 
-//     const markers =[]
-        
-//         for (let i = 0; i < coords.length; i++){
-//             markers.push(<Marker
-//             onClick={this.onMarkerClick}
-//             name={places[i]}
-//             position={coords[i]}
-//          />) 
-//         console.log(markers)
-//         }
-//     return markers;
-    
-// }
-    createMarkers = () => {
-        return this.continents.map((index) => {
-        return <Marker
-            onClick = { this.onMarkerClick }
-            position = { index.coords }
-            name = { index.places } />
-        })
-    }
-
- 
       render() {
          
           return(
@@ -110,10 +98,12 @@ const mapStyles = {
                         position={{ lat: 44.230533, lng: -76.460828}}
 
                     />
-                    <div>
-                        {this.createMarkers()}
-                    </div>
-                    
+
+                    { this.state.markers }
+
+                    {/* <div>{ this.createMarkers() }</div>
+                    <div>{ this.renderMarkers() }</div> */}
+
                     <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
@@ -128,24 +118,7 @@ const mapStyles = {
       }
   }
 
-// function onMarkerClick(props, marker, e) {
-//     this.setState({
-//         selectedPlace: props,
-//         activeMarker: marker,
-//         showingInfoWindow: true
-//     });
-// }
-
-// function onClose(props) {
-//     if(this.state.showingInfoWindow) {
-//         this.setState({
-//             showingInfoWindow: false,
-//             activeMarker: null
-//         });
-//     }
-// } 
-
 export default GoogleApiWrapper({
-    apiKey: 'temporaryily deleted'
+    apiKey: API_KEY //'temporaryily deleted'
 })(MapContainer);
 
