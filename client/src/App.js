@@ -4,33 +4,42 @@ import MapContainer from './components/map';
 import styled, {css} from 'styled-components'
 import ContinentMenu from './components/continentMenu';
 import ChangeViewMenu from './components/changeViewMenu';
+import ListPage from './components/ListPage'
+import InteractiveList from './components/List'
+import ListClass from './components/ListClass'
 import Grid from '@material-ui/core/Grid';
-
-// import Dropdown from 'react-bootstrap/Dropdown';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
-
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid red;
-  color: red;
-  margin: 0 1em;
-  padding: 0.25em 1em;
+import { makeStyles } from '@material-ui/core/styles';
+import {indigo } from '@material-ui/core/colors';
+// const Button = styled.button`
+//   background: transparent;
+//   border-radius: 3px;
+//   border: 2px solid red;
+//   color: red;
+//   margin: 0 1em;
+//   padding: 0.25em 1em;
   
-  ${props =>
-    props.primary &&
-    css`
-      background: red;
-      color: white;
-    `};
-`
+//   ${props =>
+//     props.primary &&
+//     css`
+//       background: red;
+//       color: white;
+//     `};
+// `
+// const useStyles = makeStyles(theme => ({
+//   blueColour: {
+//     margin: 10,
+//     color: '#fff',
+//     backgroundColor: indigo[500],
+//   },
+// }));
 
+// const classes = useStyles();
 export class App extends Component {
   state = {
-    center: undefined
+    center: undefined,
+    page: "map"
   };
-
+  
   changeView = (continent) => {
     return (
       this.setState({
@@ -38,24 +47,13 @@ export class App extends Component {
       })
     )
   }
-  
-  // getLngLat = () => {
-  //   return axios({
-  //     method: "POST",
-  //     url: "/server"
-  //   })
-  // }
-
-  // componentDidMount() {
-  //   this.getLngLat()
-  //   .then(response => {
-  //     var i;
-  //     for (i = 0; i < 8; i++) {
-  //       console.log(response.data.locations[i], response.data.LatLng[i]);
-  //     }
-  //   });
-  // }
-
+  changePage = (page) => {
+    return (
+      this.setState({
+        page: page
+      })
+    )
+  }
 
   render() {
     return (
@@ -67,12 +65,12 @@ export class App extends Component {
             <ContinentMenu changeView={this.changeView} />
           </Grid>
           <Grid item xs={3}>
-            <ChangeViewMenu  />
+            <ChangeViewMenu changePage={this.changePage} />
           </Grid>  
         </Grid>  
         </header>
-        <MapContainer center={this.state.center} />
-        
+        {(this.state.page === "map") && <MapContainer center={this.state.center} />}
+        {(this.state.page === "list") && <ListClass />}
       </div>
     );
   }

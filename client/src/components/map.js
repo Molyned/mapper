@@ -8,7 +8,7 @@ const mapStyles = {
     height: '90%'
   };
 
-  const API_KEY = process.env.REACT_APP_MAP_KEY;
+const API_KEY = process.env.REACT_APP_MAP_KEY;
 
   const continents = {
     NA: {lat: 54.5260, lng: -105.2551},
@@ -53,11 +53,10 @@ const mapStyles = {
   }
 
   getMarkers = () => {
-    this.getLngLat()
-    .then(response => {
+    this.getLngLat().then(response => {
         for (let i = 0; i < response.data.locations.length; i++) {
-            console.log("Coords: ", response.data.LatLng[i])
-            console.log("Name: ", response.data.locations[i])
+            // console.log("Coords: ", response.data.LatLng[i])
+            // console.log("Name: ", response.data.locations[i])
 
             this.setState({
                 markers:[...this.state.markers, 
@@ -71,11 +70,8 @@ const mapStyles = {
         }
     });
   } 
-
       render() {
-         
           return(
-                    
                 <Map
                     google={this.props.google}
                     //   zoom={9}
@@ -95,14 +91,10 @@ const mapStyles = {
                     <Marker
                         onClick={this.onMarkerClick}
                         name={'Daniels Home'}
-                        position={{ lat: 44.230533, lng: -76.460828}}
+                        position={{ lat: 44.229622, lng: -76.496784}}
 
                     />
-
                     { this.state.markers }
-
-                    {/* <div>{ this.createMarkers() }</div>
-                    <div>{ this.renderMarkers() }</div> */}
 
                     <InfoWindow
                         marker={this.state.activeMarker}
@@ -119,6 +111,6 @@ const mapStyles = {
   }
 
 export default GoogleApiWrapper({
-    apiKey: API_KEY //'temporaryily deleted'
+    apiKey: API_KEY 
 })(MapContainer);
 

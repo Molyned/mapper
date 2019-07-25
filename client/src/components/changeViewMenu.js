@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -28,8 +28,8 @@ export default function ChangeViewMenu(props) {
           onClose={handleClose}
         >
         
-          <MenuItem onClick={handleClose}> List View </MenuItem>
-          <MenuItem onClick={handleClose}> Map View </MenuItem>
+          <MenuItem onClick={() => {handleClose(); props.changePage("list")}}> List View </MenuItem>
+          <MenuItem onClick={() => {handleClose(); props.changePage("map")}}> Map View </MenuItem>
           
         </Menu>
       </div>
