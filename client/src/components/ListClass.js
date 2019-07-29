@@ -19,7 +19,6 @@ import {indigo } from '@material-ui/core/colors';
 import axios from "axios";
 import { Icon } from '@material-ui/core';
 
-let markers = []
 
 
 const useStyles = makeStyles(theme => ({
@@ -66,7 +65,7 @@ export default class ListClass extends Component {
                 markers:[...this.state.markers, 
                     <ListItem>
                         <ListItemAvatar>
-                            <Avatar >
+                            <Avatar > 
                                 <AddLocationIcon />
                             </Avatar>
                         </ListItemAvatar>
@@ -80,7 +79,6 @@ export default class ListClass extends Component {
                                 <DeleteIcon />
                             </IconButton>
                         </ListItemSecondaryAction>
-                    
                     </ListItem>
                 ]
             })

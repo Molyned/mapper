@@ -56,35 +56,7 @@ export default function InteractiveList() {
     })
   }
   
-  function createListItems(markers) {
-    getLngLat().then(response => {
-        // let markers = [];
-        for (let i = 0; i < response.data.locations.length; i++) {
-            // console.log("Name: ", response.data.locations[i])
-                markers.push(response.data.locations[i])
-        
-                    
-                    // markers, 
-                    // <ListItem>
-                    //     <ListItemAvatar>
-                    //         <Avatar className={classes.blueColour}>
-                    //             <AddLocationIcon />
-                    //         </Avatar>
-                    //     </ListItemAvatar>
-                    //     <ListItemText
-                    //         primary={response.data.locations[i]}
-                    //     />
-                    //     <ListItemSecondaryAction>
-                    //         <IconButton edge="end" aria-label="Delete">
-                    //             <DeleteIcon />
-                    //         </IconButton>
-                    //     </ListItemSecondaryAction>
-                    // </ListItem>)
-    console.log(markers)
-        }
-        return markers;
-    })
- }
+  
 
   return (
     <div className={classes.root}>
@@ -96,16 +68,14 @@ export default function InteractiveList() {
             </Typography>
                 <div className={classes.places}>
                     <List dense={dense}>
-                    {createListItems()}
-                       {markers.map(marker => (
                                 <ListItem>
                                     <ListItemAvatar>
                                     <Avatar className={classes.blueColour}>
                                         <AddLocationIcon />
                                     </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText key={marker}
-                                        primary={marker}
+                                    <ListItemText 
+                                        primary="dog"
                                     />
                                     
                                     <ListItemSecondaryAction>
@@ -114,7 +84,6 @@ export default function InteractiveList() {
                                         </IconButton>
                                     </ListItemSecondaryAction>
                                 </ListItem>
-                            ))}
                     </List>
                 </div>
         </Grid>

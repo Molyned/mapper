@@ -3,8 +3,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 const bodyParser = require('body-parser')
+require('dotenv').config(); 
 const googleMapsClient = require('@google/maps').createClient({
-  key: 'api_key'
+  key:  process.env.MAP_KEY //'AIzaSyAKONVO8XPVqx1EPWWh4uZV9w-__Hx-RMU'
 });
 const cors = require('cors')
 

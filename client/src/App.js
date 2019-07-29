@@ -10,6 +10,8 @@ import ListClass from './components/ListClass'
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import {indigo } from '@material-ui/core/colors';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/styles';
 // const Button = styled.button`
 //   background: transparent;
 //   border-radius: 3px;
@@ -25,13 +27,13 @@ import {indigo } from '@material-ui/core/colors';
 //       color: white;
 //     `};
 // `
-// const useStyles = makeStyles(theme => ({
-//   blueColour: {
-//     margin: 10,
-//     color: '#fff',
-//     backgroundColor: indigo[500],
-//   },
-// }));
+const styles = makeStyles(theme => ({
+  blueColour: {
+    margin: 10,
+    color: '#fff',
+    backgroundColor: indigo[500],
+  },
+}));
 
 // const classes = useStyles();
 export class App extends Component {
@@ -56,8 +58,12 @@ export class App extends Component {
   }
 
   render() {
+
+    const {classes} = this.props;
+
     return (
       <div className="App">
+        <h1 className={classes.blueColour}> DOG </h1>
         <header className="App-header">
         {/* <View style={{ flexDirection: 'row' }}></View> */}
         <Grid container spacing={3} justify="center">
@@ -77,4 +83,8 @@ export class App extends Component {
 
 }
 
-export default App;
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(App);
