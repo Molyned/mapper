@@ -18,8 +18,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import {indigo } from '@material-ui/core/colors';
 import axios from "axios";
 import { Icon } from '@material-ui/core';
-let markers = []
-
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,26 +35,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function generate(element) {
-  return [0, 1, 2].map(value =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
-
 export default function InteractiveList() {
   const classes = useStyles();
   const [dense] = React.useState(false);
-
-  function getLngLat() {
-    return axios({
-      method: "POST",
-      url: "/server"
-    })
-  }
-  
-  
 
   return (
     <div className={classes.root}>
